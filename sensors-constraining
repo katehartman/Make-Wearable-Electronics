@@ -1,0 +1,29 @@
+/*
+Make: Wearable Electronics
+ Constrain example
+ */
+//initialize variables
+int lightSensorPin = 2;
+int lightSensorValue = 0;
+int constrainedLightSensorValue = 0;
+
+void setup() {
+  //initialize serial communication:
+  Serial.begin(9600);
+}
+
+void loop() {
+  //read pin A2 & store value in a variable:
+  lightSensorValue = analogRead(lightSensorPin);
+  //constrain the light sensor values to 70 to 940
+  constrainedLightSensorValue = constrain(lightSensorValue, 70, 940);
+
+  //print the results:
+  Serial.print("Light Sensor Value ");
+  Serial.print(lightSensorValue);
+  Serial.print(", Constrained Light Sensor Value: ");
+  Serial.println(constrainedLightSensorValue);
+
+  // delay between readings:
+  delay(100);
+}
