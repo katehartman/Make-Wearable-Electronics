@@ -1,0 +1,42 @@
+/*
+Make: Wearable Electronics
+ Smoothing example
+ */
+
+//initialize variables
+int lightSensorPin = 2;
+int lightSensorValue = 0;
+int numberOfReadings = 0;
+int sensorReadingTotal = 0;
+int averageSensorValue;
+
+
+void setup(){
+  //initialize serial communication:
+  Serial.begin(9600);
+}
+
+void loop(){
+  //if there have been 9 or less sensor readings
+  if(numberOfReadings < 9){
+    lightSensorValue = analogRead(lightSensorPin);
+    sensorReadingTotal = sensorReadingTotal + lightSensorValue;
+    numberOfReadings = numberOfReadings + 1;
+  }
+  //if this is the 10th sensor reading
+  else if (numberOfReadings = 9){ 
+    sensorReadingTotal = sensorReadingTotal + lightSensorValue;
+    averageSensorValue = sensorReadingTotal/10;
+    numberOfReadings=0;
+    sensorReadingTotal = 0;
+  }
+
+  //print smoothing results
+  Serial.print("Current Sensor Value ");
+  Serial.print(lightSensorValue);
+  Serial.print(", Smoothed Sensor Value: ");
+  Serial.println(averageSensorValue);
+
+  delay(100);
+
+}
